@@ -2,18 +2,12 @@
 import time
 
 import RPi.GPIO as GPIO
-if not 'spi' in locals():
-    import spidev
-    # Open SPI bus
-    spi = spidev.SpiDev()
-    spi.open(0,1)
-    spi.max_speed_hz=1000000
 
 
 class ButtonMatrix():
 
-    def __init__(self):
-
+    def __init__(self, spi):
+        self.spi = spi
         self.calculated = ""
 
         GPIO.setmode(GPIO.BCM)
@@ -49,7 +43,7 @@ class ButtonMatrix():
     def ReadChannel(self,channel):
         # Function to read SPI data from MCP3008 chip
         # Channel must be an integer 0-7
-        adc = spi.xfer2([1,(8+channel)<<4,0])
+        adc = self.spi.xfer2([1,(8+channel)<<4,0])
         data = ((adc[1]&3) << 8) + adc[2]
         return data
     

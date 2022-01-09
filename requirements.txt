@@ -1,2 +1,4 @@
 rpi_ws281x
 adafruit-circuitpython-charlcd
+adafruit-circuitpython-ht16k33
+

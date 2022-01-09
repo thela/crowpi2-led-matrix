@@ -1,12 +1,10 @@
-import board
+
 import time
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
 
-i2c = board.I2C()  # uses board.SCL and board.SDA
-
 class LCDModule():
 
-    def __init__(self):
+    def __init__(self, i2c):
         # Define LCD column and row size for 16x2 LCD.
         self.address = 0x21
         self.lcd_columns = 16
@@ -37,19 +35,3 @@ class LCDModule():
         self.clear()
         #self.lcd.message(text)
         self.lcd.message = text
-        # wait 3 seconds
-#         time.sleep(3)
-        # clear screen
-#         self.clear()
-        # wait 0.1 seconds
-#         time.sleep(0.1)
-        # turn off LCD
-#         self.turn_off()
-
-#         time.sleep(1)
-        # clear screen
-#         self.clear()
-        # wait 0.1 seconds
-        time.sleep(0.05)
-        # turn off LCD
-#         self.turn_off()

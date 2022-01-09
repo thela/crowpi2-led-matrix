@@ -6,7 +6,7 @@ LED_COUNT = 64        # Number of LED pixels.
 LED_PIN = 12          # GPIO pin connected to the pixels (18 uses $
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800$
 LED_DMA = 10          # DMA channel to use for generating signal ($
-LED_BRIGHTNESS = 50  # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 10  # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False    # True to invert the signal (when using NPN $
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
@@ -29,8 +29,8 @@ def dim_colours(strip):
     strip.show()
     
 
-def set_strip_to_random_colour(strip, key):
-    #rand_col = int(155*random.random())int((key)/row_size_from)*row_size_to+ (key % row_size)*int(row_size_to/row_size_from)
+def set_block_to_colour(strip, key, colour):
+
     # ribaltamento destra - sinistra
     key = row_size_from - (key % row_size_from + 1) + int(key/row_size_from) * row_size_from
     # ribaltamento alto - basso
@@ -40,8 +40,12 @@ def set_strip_to_random_colour(strip, key):
     pixel_is = [ pixel_corner, pixel_corner + 1, pixel_corner + row_size_to, pixel_corner + row_size_to +1
     ]
     
-    colour = [int(255*random.random()), int(255*random.random()), int(255*random.random())]
+
     for pixel_i in pixel_is:
-        strip.setPixelColorRGB(pixel_i, *colour)
+        strip.setPixelColor(pixel_i, colour)
         #strip.setPixelColor(pixel_i, colour)
     strip.show()
+    
+def set_block_to_random_colour(strip, key):
+    colour = Color(int(255*random.random()), int(255*random.random()), int(255*random.random()))
+    set_block_to_colour(strip, key, colour)

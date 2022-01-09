@@ -2,9 +2,9 @@
 import time
 import RPi.GPIO as GPIO
 
-from lcd_module import LCDModule
-from led_matrix_module import strip, set_strip_to_random_colour, dim_colours
-from button_matrix_module import ButtonMatrix
+from modules.lcd import LCDModule
+from modules.led_matrix import strip, set_strip_to_random_colour, dim_colours
+from modules.button_matrix import ButtonMatrix
 
 
 strip.begin()
@@ -29,7 +29,7 @@ if __name__ == "__main__":
                     oldkey = key
                     if key >= 0:
                         # button pressed, activate it
-                            set_strip_to_random_colour(strip, key)
+                            set_block_to_random_colour(strip, key)
                             lcd_screen.write_lcd("pressed -> {0}".format(key))
             time.sleep(buttons.delay)
 
